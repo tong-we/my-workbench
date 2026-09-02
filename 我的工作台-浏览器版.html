@@ -169,9 +169,6 @@
     .main { padding:26px clamp(16px,3.4vw,44px) 36px; max-width:1600px; width:100%; }
     .topbar { margin-bottom:16px; }
     .panel { box-shadow:none; border-radius:12px; }
-    .quick-add { display:grid; grid-template-columns:minmax(220px,1fr) 150px 92px auto; gap:8px; align-items:center; margin-bottom:16px; }
-    .quick-add input,.quick-add select { min-width:0; height:42px; border:1px solid var(--line); border-radius:9px; padding:0 12px; background:var(--panel); color:var(--text); outline:0; }
-    .quick-add input:focus,.quick-add select:focus { border-color:var(--primary); box-shadow:0 0 0 3px var(--primary-soft); }
     .today-layout { display:grid; grid-template-columns:minmax(330px,.85fr) minmax(420px,1.15fr); gap:16px; align-items:start; }
     .today-list-panel,.today-detail-panel { min-height:454px; }
     .today-detail-panel { padding:18px; }
@@ -188,19 +185,16 @@
     .detail-placeholder p { max-width:240px; font-size:12px; margin-top:5px; }
     .progress-line.compact { margin:8px 0 0; max-width:260px; }
     .progress-line.compact span:first-child { color:var(--muted); font-size:11px; }
+    .list-head-actions { display:flex; align-items:center; justify-content:flex-end; gap:12px; }
     .upcoming-panel { padding:18px 20px; }
     .upcoming-list { margin-top:8px; }
     .day-group { padding-top:11px; }
     @media (max-width:800px) {
-      .quick-add { grid-template-columns:1fr 110px 76px auto; }
       .today-layout { grid-template-columns:1fr; }
       .today-detail-panel { min-height:0; }
       .detail-placeholder { min-height:180px; }
     }
     @media (max-width:520px) {
-      .quick-add { grid-template-columns:1fr 1fr; }
-      .quick-add input:first-child { grid-column:1 / -1; }
-      .quick-add .button { width:100%; }
     }
     /* Focused premium workspace */
     body { background:#f6f7f9; }
@@ -219,9 +213,6 @@
     .button { transition:background .15s,border-color .15s,transform .15s; }
     .button.primary:hover { transform:translateY(-1px); }
     .panel { box-shadow:0 2px 8px rgba(31,48,66,.025); border-radius:12px; }
-    .quick-add { background:var(--panel); border:1px solid var(--line); border-radius:11px; padding:7px; margin-bottom:15px; box-shadow:0 2px 8px rgba(31,48,66,.025); }
-    .quick-add input,.quick-add select { border-color:transparent; background:var(--panel-soft); }
-    .quick-add input:first-child { background:transparent; }
     .today-layout { grid-template-columns:minmax(320px,.85fr) minmax(460px,1.15fr); gap:15px; }
     .today-list-panel,.today-detail-panel { min-height:468px; }
     .today-list-panel { padding:18px 19px; }
@@ -259,7 +250,6 @@
     @media (max-width:520px) {
       .topbar { align-items:flex-start; }
       .topbar .actions .button:first-child { display:none; }
-      .quick-add { padding:6px; }
     }
     .records-section .panel-head { align-items:flex-start; }
     .records-section .panel-head h2 + .muted { display:block; margin-top:3px; }
@@ -398,11 +388,6 @@
     .stat-item { display:grid; gap:2px; padding:13px 16px; background:#fff; }
     .stat-label { color:var(--muted); font-size:12px; }
     .stat-item strong { color:var(--ink); font-size:21px; line-height:1.1; font-weight:700; }
-    .quick-add { display:grid; grid-template-columns:22px minmax(0,1fr) 132px 84px auto; gap:8px; align-items:center; min-height:54px; padding:7px 8px; margin-bottom:18px; border:1px solid var(--line); border-radius:var(--radius-md); background:#fff; box-shadow:var(--shadow-soft); }
-    .quick-add-mark { display:grid; place-items:center; color:var(--brand); font-size:19px; }
-    .quick-add input,.quick-add select { height:38px; border:1px solid transparent; border-radius:var(--radius-sm); background:var(--panel-soft); color:var(--text); }
-    .quick-add input:first-of-type { background:transparent; }
-    .quick-add input:focus,.quick-add select:focus { border-color:#bdcaff; outline:0; box-shadow:0 0 0 3px var(--brand-soft); }
     .today-layout { grid-template-columns:minmax(360px,.88fr) minmax(520px,1.12fr); gap:16px; align-items:start; margin-bottom:16px; }
     .today-list-panel,.today-detail-panel { min-height:0; max-height:none; overflow:visible; }
     .today-list-panel { padding:20px; }
@@ -438,8 +423,8 @@
     .settings-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }.setting-card { padding:20px; border:1px solid var(--line); border-radius:var(--radius-lg); background:#fff; box-shadow:var(--shadow-soft); }.setting-card-head { display:flex; gap:12px; align-items:flex-start; }.setting-icon { width:34px; height:34px; display:grid; place-items:center; flex:none; border-radius:10px; color:var(--brand-ink); background:var(--brand-soft); font-size:18px; }.setting-card h2 { font-size:16px; }.setting-card p { color:var(--muted); margin-top:3px; font-size:12px; }.setting-control-row { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-top:20px; padding-top:15px; border-top:1px solid var(--line-soft); }.setting-control-row strong { display:block; color:var(--ink); font-size:13px; }.setting-control-row .muted { display:block; margin-top:2px; }.setting-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }.setting-inline { display:flex; align-items:center; gap:10px; }.setting-inline input[type=time] { width:104px; height:38px; padding:7px 9px; border:1px solid var(--line); border-radius:var(--radius-sm); color:var(--text); background:#fff; }.access-box { display:flex; align-items:center; gap:9px; margin-top:20px; padding:12px; border:1px solid var(--line-soft); border-radius:var(--radius-md); background:var(--panel-soft); }.access-box > div { min-width:0; flex:1; }.access-box strong,.access-box span { display:block; }.access-box strong { color:var(--ink); font-size:13px; }.access-box .muted { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin-top:3px; }.access-dot { width:8px; height:8px; flex:none; border-radius:50%; background:#34a56f; box-shadow:0 0 0 4px #e5f7ed; }.privacy-card { background:#fbfcff; }.privacy-list { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }.privacy-list span { padding:6px 9px; border-radius:7px; color:var(--muted); background:#f2f5fa; font-size:12px; }
     .image-preview-backdrop { background:rgba(20,31,47,.28); }.image-preview-panel { border-radius:var(--radius-lg); }.toast { border-radius:var(--radius-md); font-size:13px; }
     @media (max-width:1100px) { .main { width:min(100% - 32px,1000px); }.today-layout,.library-layout { grid-template-columns:1fr; }.today-detail-panel { order:2; }.today-list-panel { order:1; }.detail-top-grid.description-compact,.detail-top-grid.description-long { grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); }.library-detail-panel { min-height:0; }.upcoming-list { overflow-x:auto; grid-template-columns:repeat(5,minmax(170px,1fr)); padding-bottom:4px; } }
-    @media (max-width:700px) { .sidebar { min-height:60px; height:auto; padding:10px 14px 0; flex-wrap:wrap; }.brand { margin:0 18px 9px 0; }.nav-button { min-height:38px; padding:8px 10px 11px; font-size:13px; }.nav-icon { display:none; }.side-footer { display:none; }.main { width:100%; padding:24px 14px 38px; }.topbar { align-items:flex-start; margin-bottom:17px; }.topbar-right { gap:8px; }.topbar-right .work-rhythm { display:none; } h1 { font-size:25px; }.today-stats { grid-template-columns:repeat(4,1fr); }.stat-item { padding:11px 8px; }.stat-label { font-size:10px; }.stat-item strong { font-size:18px; }.quick-add { grid-template-columns:20px minmax(0,1fr) 78px auto; }.quick-add input[type=date] { grid-column:2; }.quick-add select { grid-column:3; }.quick-add button { grid-column:4; }.detail-top-grid.description-compact,.detail-top-grid.description-long { grid-template-columns:1fr; }.detail-head { display:block; }.detail-head .actions { margin-top:11px; }.library-toolbar { display:grid; }.library-toolbar .search { width:100%; }.filter-tabs { justify-content:space-between; }.filter-tab { flex:1; }.settings-grid { grid-template-columns:1fr; }.upcoming-panel .panel-head > span:last-child { display:none; } }
-    @media (max-width:430px) { .topbar .button { padding:8px 10px; font-size:12px; }.today-stats { gap:1px; }.stat-item { padding:10px 5px; }.task-row { grid-template-columns:24px minmax(0,1fr); }.task-row > .status { grid-column:2; justify-self:start; margin-top:-5px; }.quick-add { grid-template-columns:18px minmax(0,1fr) auto; }.quick-add input[type=date],.quick-add select { grid-column:auto; }.quick-add button { grid-column:1 / -1; width:100%; }.today-detail-panel,.today-list-panel,.library-detail-panel,.library-list-panel { padding:15px; }.records-section { padding:13px; } }
+    @media (max-width:700px) { .sidebar { min-height:60px; height:auto; padding:10px 14px 0; flex-wrap:wrap; }.brand { margin:0 18px 9px 0; }.nav-button { min-height:38px; padding:8px 10px 11px; font-size:13px; }.nav-icon { display:none; }.side-footer { display:none; }.main { width:100%; padding:24px 14px 38px; }.topbar { align-items:flex-start; margin-bottom:17px; }.topbar-right { gap:8px; }.topbar-right .work-rhythm { display:none; } h1 { font-size:25px; }.today-stats { grid-template-columns:repeat(4,1fr); }.stat-item { padding:11px 8px; }.stat-label { font-size:10px; }.stat-item strong { font-size:18px; }.detail-top-grid.description-compact,.detail-top-grid.description-long { grid-template-columns:1fr; }.detail-head { display:block; }.detail-head .actions { margin-top:11px; }.library-toolbar { display:grid; }.library-toolbar .search { width:100%; }.filter-tabs { justify-content:space-between; }.filter-tab { flex:1; }.settings-grid { grid-template-columns:1fr; }.upcoming-panel .panel-head > span:last-child { display:none; } }
+    @media (max-width:430px) { .topbar .button { padding:8px 10px; font-size:12px; }.today-stats { gap:1px; }.stat-item { padding:10px 5px; }.task-row { grid-template-columns:24px minmax(0,1fr); }.task-row > .status { grid-column:2; justify-self:start; margin-top:-5px; }.today-detail-panel,.today-list-panel,.library-detail-panel,.library-list-panel { padding:15px; }.records-section { padding:13px; } }
     /* Final polish: compact empty states, safe narrow layouts, semantic deadline cues */
     .today-detail-panel,.library-detail-panel { background:#fff; }
     .detail-placeholder { min-height:240px; }
@@ -456,14 +441,11 @@
       .topbar-right,.topbar > .button { display:none; }
       .detail-placeholder { min-height:190px; }
       .today-stats { width:min(362px,calc(100vw - 28px)) !important; max-width:calc(100vw - 28px); grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .today-list-panel .panel-head { display:block; }
+      .today-list-panel .list-head-actions { display:grid; grid-template-columns:1fr; gap:10px; margin-top:12px; }
+      .today-list-panel .list-head-actions .button { width:100%; }
       .stat-item { min-width:0; }
       .stat-label { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-      .quick-add { position:relative; width:min(362px,calc(100vw - 28px)); max-width:calc(100vw - 28px); min-height:145px; grid-template-columns:18px minmax(0,1fr) 68px; grid-template-rows:38px 38px 38px; gap:7px; }
-      .quick-add-mark { grid-column:1; grid-row:1; }
-      #quickTaskTitle { grid-column:2 / -1; grid-row:1; }
-      #quickTaskDueDate { grid-column:1 / 3; grid-row:2; }
-      #quickTaskPriority { grid-column:3; grid-row:2; }
-      #quickTaskForm > button.button { position:static !important; grid-column:1 / -1 !important; grid-row:3 !important; width:100% !important; display:block !important; }
       .library-toolbar { display:block !important; width:min(362px,calc(100vw - 28px)) !important; max-width:calc(100vw - 28px); min-width:0; }
       .library-toolbar .search { width:100%; max-width:100%; }
       .filter-tabs { width:100% !important; max-width:100%; min-width:0; overflow:hidden; display:flex !important; flex:none !important; }
@@ -478,12 +460,6 @@
     }
     @media (max-width:430px) {
       .detail-placeholder { min-height:165px; }
-      .quick-add { position:relative; width:min(362px,calc(100vw - 28px)); max-width:calc(100vw - 28px); min-height:145px; grid-template-columns:18px minmax(0,1fr) 68px; grid-template-rows:38px 38px; gap:7px; }
-      .quick-add-mark { grid-column:1; grid-row:1; }
-      #quickTaskTitle { grid-column:2 / -1; grid-row:1; }
-      #quickTaskDueDate { grid-column:1 / 3; grid-row:2; }
-      #quickTaskPriority { grid-column:3; grid-row:2; }
-      #quickTaskForm > button.button { position:absolute; left:8px; right:8px; bottom:8px; width:auto; display:block; }
       .setting-inline { flex-shrink:0; }
     }
     /* Second-pass refinement: less chrome, denser work rhythm, clearer composer */
@@ -536,10 +512,6 @@
       .nav-button.active:after { left:30%; right:30%; bottom:2px; }
       .nav-icon { display:grid; width:18px; height:18px; }
       .main { padding-bottom:108px; }
-      .quick-add.collapsed { min-height:54px; grid-template-columns:20px minmax(0,1fr); grid-template-rows:38px; padding:7px 8px; }
-      .quick-add.collapsed .quick-add-mark { grid-column:1; grid-row:1; }
-      .quick-add.collapsed #quickTaskTitle { grid-column:2; grid-row:1; }
-      .quick-add.collapsed input[type=date],.quick-add.collapsed select,.quick-add.collapsed button { display:none !important; }
       .today-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 22px; padding:2px 0; }
       .stat-item { min-width:0; padding:3px 0; }
       .stat-item + .stat-item:before { display:none; }
@@ -554,10 +526,7 @@
       .page-subtitle { font-size:12px; }
       .attachment-preview { grid-template-columns:76px minmax(0,1fr) auto; }
       .attachment-thumb { width:76px; height:60px; }
-      .quick-add.collapsed { min-height:54px; grid-template-rows:38px; }
-      .quick-add.collapsed input[type=date],.quick-add.collapsed select,.quick-add.collapsed button { display:none !important; }
     }
-    @media (max-width:700px) { #quickTaskForm.quick-add.collapsed > button.button { display:none !important; } }
     .time-info { display:grid; gap:1px; min-width:155px; text-align:right; }
     .time-info strong { color:var(--ink); font-size:22px; line-height:1.1; letter-spacing:-.02em; }
     .time-info span { color:var(--muted); font-size:11px; }
@@ -653,7 +622,6 @@
       .topbar { margin-bottom:14px; }
       .topbar .eyebrow { margin-bottom:4px; }
       .today-stats { margin-bottom:9px; }
-      .quick-add { min-height:50px; margin-bottom:12px; }
       .today-layout { align-items:start; margin-bottom:12px; }
       .today-list-panel { height:500px; min-height:500px; }
       .today-detail-panel { height:auto; min-height:0; }
@@ -781,7 +749,7 @@
     .setting-control-row .muted,.access-box .muted { color:var(--text-tertiary); }
     .privacy-list span { color:var(--text-muted); }
     .side-footer { color:var(--text-tertiary); }
-    .panel,.today-stats,.quick-add,.search,.setting-card { border-color:var(--line); }
+    .panel,.today-stats,.search,.setting-card { border-color:var(--line); }
     .detail-top-grid,.records-section .panel-head,.task-group-future,.task-group-nodue,.completed-group,.upcoming-day-head { border-color:var(--line-soft) !important; }
     /* Task detail surfaces: three quiet functional zones, one shared language */
     :root {
@@ -832,9 +800,6 @@
     .task-editor-modal .field input,.task-editor-modal .field textarea,.task-editor-modal .field select { background:#fff; }
     .task-editor-modal .field textarea { min-height:104px; }
     .task-editor-modal .task-date-row { align-items:end; }
-    .task-editor-modal .date-field-wrap { position:relative; }
-    .task-editor-modal .field-clear { position:absolute; right:8px; bottom:7px; padding:3px 5px; border:0; color:var(--primary); background:transparent; font-size:11px; cursor:pointer; }
-    .task-editor-modal .field-clear:hover { color:var(--brand-ink); }
     .priority-picker { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
     .priority-choice { min-height:39px; padding:7px 8px; border:1px solid var(--line); border-radius:9px; color:var(--text-secondary); background:#fff; font-size:13px; cursor:pointer; transition:background var(--transition),border-color var(--transition),color var(--transition); }
     .priority-choice:hover { border-color:#c7d0dc; }
@@ -845,24 +810,14 @@
     .task-editor-modal .hidden-field { display:none; }
     .task-editor-modal .modal-foot { margin-top:22px; padding-top:16px; border-top:1px solid var(--line-soft); }
     .task-editor-modal .modal-foot .button.primary { min-width:112px; }
-    .quick-more { display:none; white-space:nowrap; }
-    .quick-add.expanded { grid-template-columns:22px minmax(0,1fr) 132px 110px auto auto; }
-    .quick-add.expanded .quick-more { display:inline-flex; }
-    .quick-add.expanded .quick-more { grid-column:5; width:auto; }
-    .quick-add.expanded > .button[type="submit"] { grid-column:6; width:auto; }
     @media (max-width:700px) {
       .task-editor-backdrop { align-items:stretch; width:100vw; padding:0; overflow:hidden; }
-      .task-editor-modal { width:100vw; max-width:100vw; min-width:0; height:100%; margin:0; border-radius:0; padding:22px 16px calc(22px + env(safe-area-inset-bottom)); }
+      .task-editor-modal { width:100%; max-width:100%; min-width:0; height:100%; margin:0; border-radius:0; padding:22px 16px calc(22px + env(safe-area-inset-bottom)); overflow-x:hidden; }
+      .task-editor-modal .field,.task-editor-modal .form-row,.task-editor-modal .priority-picker,.task-editor-modal .field input,.task-editor-modal .field textarea,.task-editor-modal .field select { min-width:0; max-width:100%; }
+      .task-editor-modal .priority-choice { min-width:0; width:100%; padding-left:4px; padding-right:4px; }
       .task-editor-modal .modal-foot { position:sticky; bottom:0; width:auto; display:grid; grid-template-columns:auto auto; justify-content:start; gap:9px; margin-left:-16px; margin-right:-16px; padding:14px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.96); }
       .task-editor-modal .modal-foot > .button:first-child { width:auto !important; min-width:0; justify-self:start; }
       .task-editor-modal .modal-foot > .button.primary { width:112px !important; justify-self:end; }
-      .quick-add.expanded { min-height:94px; grid-template-columns:20px minmax(0,1fr) auto; grid-template-rows:38px 38px; }
-      .quick-add.expanded #quickTaskTitle { grid-column:2 / -1; grid-row:1; }
-      .quick-add.expanded #quickTaskDueDate { grid-column:1 / 3; grid-row:2; }
-      .quick-add.expanded #quickTaskPriority { grid-column:3; grid-row:2; }
-      #quickTaskForm.quick-add.expanded > button.button { position:static !important; left:auto; right:auto; bottom:auto; width:auto !important; display:inline-flex !important; }
-      .quick-add.expanded .quick-more { grid-column:1 / 3; grid-row:3; justify-self:start; }
-      .quick-add.expanded > .button[type="submit"] { grid-column:3; grid-row:3; justify-self:end; }
     }
   </style>
 </head>
@@ -880,15 +835,14 @@
 
     <main class="main">
       <section class="view active" id="todayView">
-        <div class="topbar"><div><div class="eyebrow" id="todayDate">9月1日 · 星期二</div><h1>今日待办</h1></div><div class="topbar-right"><div class="time-info"><strong id="liveClock">--:--</strong><span id="liveDate">9月1日 · 星期二</span><small id="holidayText">寻找下一个节日</small></div><button class="button primary" data-new-task>＋ 新建任务</button></div></div>
+        <div class="topbar"><div><div class="eyebrow" id="todayDate">9月1日 · 星期二</div><h1>今日待办</h1></div><div class="topbar-right"><div class="time-info"><strong id="liveClock">--:--</strong><span id="liveDate">9月1日 · 星期二</span><small id="holidayText">寻找下一个节日</small></div></div></div>
         <div class="today-stats" aria-label="今日概览"><div class="stat-item"><span class="stat-label">待完成</span><strong id="statTasks">0</strong></div><div class="stat-item"><span class="stat-label">今日</span><strong id="statDone">0</strong></div><div class="stat-item"><span class="stat-label">逾期</span><strong id="statDue">0</strong></div><div class="stat-item"><span class="stat-label">高优先</span><strong id="statHigh">0</strong></div></div>
-        <form class="quick-add collapsed" id="quickTaskForm"><span class="quick-add-mark">＋</span><input type="text" id="quickTaskTitle" required placeholder="快速添加任务…"><input type="date" id="quickTaskDueDate" aria-label="快速添加截止日期"><select id="quickTaskPriority" aria-label="快速添加优先级"><option value="中">中优先级</option><option value="高">高优先级</option><option value="低">低优先级</option></select><button class="button ghost quick-more" id="quickTaskMore" type="button">更多设置</button><button class="button primary" type="submit">Enter 添加</button></form>
-        <div class="today-layout"><section class="panel today-list-panel"><div class="panel-head"><div><h2>待办清单</h2><div class="progress-line compact"><span id="progressText">还没有任务</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span id="progressPercent">0%</span></div></div><span class="muted small" id="todayCount"></span></div><div class="task-list home-task-list" id="todayTasks"></div></section><section class="panel today-detail-panel" id="todayDetailPane"><div class="detail-placeholder"><span class="placeholder-mark">↗</span><strong>选择任务</strong><p>详情与工作记录会在这里查看。</p></div></section></div>
+        <div class="today-layout"><section class="panel today-list-panel"><div class="panel-head"><div><h2>待办清单</h2><div class="progress-line compact"><span id="progressText">还没有任务</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span id="progressPercent">0%</span></div></div><div class="list-head-actions"><span class="muted small" id="todayCount"></span><button class="button primary" data-new-task>＋ 新建待办</button></div></div><div class="task-list home-task-list" id="todayTasks"></div></section><section class="panel today-detail-panel" id="todayDetailPane"><div class="detail-placeholder"><span class="placeholder-mark">↗</span><strong>选择任务</strong><p>详情与工作记录会在这里查看。</p></div></section></div>
         <section class="panel upcoming-panel"><div class="panel-head"><h2>未来 5 天未完成任务</h2></div><div class="upcoming-list" id="upcomingList"></div></section>
       </section>
 
       <section class="view" id="tasksView">
-        <div class="topbar"><div><div class="eyebrow" id="librarySummary">任务与工作记录</div><h1>任务库</h1></div><button class="button primary" data-new-task>＋ 新建任务</button></div>
+        <div class="topbar"><div><div class="eyebrow" id="librarySummary">任务与工作记录</div><h1>任务库</h1></div><button class="button primary" data-new-task>＋ 新建待办</button></div>
         <div class="library-toolbar"><div class="search"><span class="search-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="8.5" cy="8.5" r="4.5"></circle><path d="m12 12 4 4"></path></svg></span><input id="taskSearch" placeholder="搜索任务、说明或工作记录"></div><div class="filter-tabs" role="tablist" aria-label="任务筛选"><button class="filter-tab active" data-task-filter="all">全部</button><button class="filter-tab" data-task-filter="active">进行中</button><button class="filter-tab" data-task-filter="done">已完成</button></div></div>
         <div class="library-layout"><section class="panel library-list-panel"><div class="panel-head"><h2>全部任务</h2><span class="muted small" id="taskCount"></span></div><div class="task-list" id="allTasks"></div></section><section class="panel library-detail-panel" id="libraryDetailPane"><div class="detail-placeholder"><span class="placeholder-mark">⌕</span><strong>选择任务</strong><p>详情与工作记录会在这里查看。</p></div></section></div>
       </section>
@@ -906,7 +860,7 @@
     </main>
   </div>
 
-  <div class="modal-backdrop task-editor-backdrop" id="taskModal"><form class="modal task-editor-modal" id="taskForm"><div class="modal-head"><h2 id="taskModalTitle">新建待办</h2><button class="close" type="button" data-close-modal aria-label="关闭">×</button></div><input type="hidden" id="taskId"><div class="field"><label for="taskTitle">任务名称 *</label><input id="taskTitle" required placeholder="例如：完成季度汇报材料"></div><div class="field"><label for="taskDescription">任务说明</label><textarea id="taskDescription" placeholder="补充任务背景、要求或需要完成的内容……"></textarea></div><div class="form-row task-date-row"><div class="field date-field-wrap"><label for="taskDueDate">截止日期</label><input type="date" id="taskDueDate"><button type="button" class="field-clear" id="clearDueDate">无截止日期</button></div><div class="field"><label for="taskDueTime">截止时间</label><input type="time" id="taskDueTime" disabled></div></div><div class="field"><label>优先级</label><div class="priority-picker" id="taskPriorityPicker" role="radiogroup" aria-label="优先级"><button type="button" class="priority-choice" data-priority-option="低">低</button><button type="button" class="priority-choice active" data-priority-option="中">中</button><button type="button" class="priority-choice" data-priority-option="高">高</button></div><select id="taskPriority" class="hidden-field" aria-hidden="true" tabindex="-1"><option value="低">低</option><option value="中" selected>中</option><option value="高">高</option></select></div><div class="field hidden-field" id="taskStatusField"><label for="taskStatus">状态</label><select id="taskStatus"><option>进行中</option><option>等待所需资源</option><option>已完成</option><option>已取消</option></select></div><div class="field"><label for="taskReminder">任务提醒时间（可选）</label><input type="datetime-local" id="taskReminder"></div><div class="modal-foot"><button type="button" class="button" data-close-modal>取消</button><button type="submit" class="button primary" id="taskSubmitButton">创建任务</button></div></form></div>
+  <div class="modal-backdrop task-editor-backdrop" id="taskModal"><form class="modal task-editor-modal" id="taskForm"><div class="modal-head"><h2 id="taskModalTitle">新建待办</h2><button class="close" type="button" data-close-modal aria-label="关闭">×</button></div><input type="hidden" id="taskId"><div class="field"><label for="taskTitle">任务名称 *</label><input id="taskTitle" required placeholder="例如：完成季度汇报材料"></div><div class="field"><label for="taskDescription">任务说明</label><textarea id="taskDescription" placeholder="补充任务背景、要求或需要完成的内容……"></textarea></div><div class="form-row task-date-row"><div class="field date-field-wrap"><label for="taskDueDate">截止日期 *</label><input type="date" id="taskDueDate" required></div><div class="field"><label for="taskDueTime">截止时间</label><input type="time" id="taskDueTime" disabled></div></div><div class="field"><label>优先级</label><div class="priority-picker" id="taskPriorityPicker" role="radiogroup" aria-label="优先级"><button type="button" class="priority-choice" data-priority-option="低">低</button><button type="button" class="priority-choice active" data-priority-option="中">中</button><button type="button" class="priority-choice" data-priority-option="高">高</button></div><select id="taskPriority" class="hidden-field" aria-hidden="true" tabindex="-1"><option value="低">低</option><option value="中" selected>中</option><option value="高">高</option></select></div><div class="field hidden-field" id="taskStatusField"><label for="taskStatus">状态</label><select id="taskStatus"><option>进行中</option><option>等待所需资源</option><option>已完成</option><option>已取消</option></select></div><div class="field"><label for="taskReminder">任务提醒时间（可选）</label><input type="datetime-local" id="taskReminder"></div><div class="modal-foot"><button type="button" class="button" data-close-modal>取消</button><button type="submit" class="button primary" id="taskSubmitButton">创建任务</button></div></form></div>
   <div class="image-preview-backdrop" id="imagePreviewBackdrop">
     <section class="image-preview-panel" role="dialog" aria-modal="true" aria-label="截图预览">
       <div class="image-preview-head"><strong id="previewImageName">截图预览</strong><button class="close" type="button" data-close-image-preview>×</button></div>
@@ -1150,7 +1104,6 @@
       const todayTasks = active.filter((task) => task.due_date === today).sort((a,b) => priorityWeight(a) - priorityWeight(b) || String(b.created_at || '').localeCompare(String(a.created_at || '')));
       const futureAll = active.filter((task) => task.due_date && task.due_date > today).sort((a,b) => a.due_date.localeCompare(b.due_date) || priorityWeight(a) - priorityWeight(b) || String(b.created_at || '').localeCompare(String(a.created_at || '')));
       const future = futureAll.filter((task) => daysBetween(today, task.due_date) <= 5);
-      const noDue = sortedTasks(active.filter((task) => !task.due_date));
       const completedToday = sortedTasks(appState.tasks.filter((task) => task.status === '已完成' && task.completed_at && dateKey(new Date(String(task.completed_at).replace(' ', 'T'))) === today));
       const compactSection = (title, tasks, variant, limit = 99) => tasks.length ? `<section class="task-group task-group-${variant}"><div class="task-group-head"><h3>${title}</h3><span>${tasks.length} 项</span></div><div class="task-group-list">${tasks.slice(0, limit).map((task) => taskRow(task, variant)).join('')}</div>${tasks.length > limit ? `<button type="button" class="task-more-link" data-open-library>还有 ${tasks.length - limit} 项 · 去任务库查看</button>` : ''}</section>` : '';
       const futurePreview = future.slice(0, 8);
@@ -1159,7 +1112,7 @@
       const futureMore = futureAll.length > futurePreview.length ? `<button type="button" class="task-more-link" data-open-library>还有 ${futureAll.length - futurePreview.length} 项 · 去任务库查看</button>` : '';
       const futureSection = futureAll.length ? `<section class="task-group task-group-future"><div class="task-group-head"><h3>接下来</h3><span>${futureAll.length} 项</span></div><div class="task-group-list">${futureBody || '<div class="muted small">5 天内暂无安排</div>'}</div>${futureMore}</section>` : '';
       const doneSection = completedToday.length ? `<details class="completed-group"><summary><span>今日已完成 · ${completedToday.length}</span><span class="completed-toggle">展开</span></summary><div class="task-group-list">${completedToday.map((task) => taskRow(task, 'completed')).join('')}</div></details>` : '';
-      const html = [compactSection('已逾期', overdue, 'overdue', 3), compactSection('今天', todayTasks, 'today'), futureSection, compactSection('无截止日期', noDue, 'nodue'), doneSection].join('');
+      const html = [compactSection('已逾期', overdue, 'overdue', 3), compactSection('今天', todayTasks, 'today'), futureSection, doneSection].join('');
       updateDateInfo();
       $('#todayCount').textContent = `今天 · ${todayTasks.length} 项`;
       $('#todayTasks').innerHTML = html || `<div class="empty"><strong>今天没有待办</strong><span>可以先添加一项任务。</span></div>`;
@@ -1252,28 +1205,6 @@
       $('#libraryDetailPane').innerHTML = '<div class="detail-placeholder"><span class="placeholder-mark">⌕</span><strong>选择任务</strong><p>详情与工作记录会在这里查看。</p></div>';
     }
 
-    function focusQuickAdd() {
-      navTo('today');
-      setTimeout(() => $('#quickTaskTitle').focus(), 0);
-    }
-
-    async function saveQuickTask(event) {
-      event.preventDefault();
-      const title = $('#quickTaskTitle').value.trim();
-      if (!title) return;
-      try {
-        const task = await api('/api/tasks', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ title, status:'进行中', priority:$('#quickTaskPriority').value, due_date:$('#quickTaskDueDate').value || dateKey(), due_time:'', reminder_time:'', description:'' }) });
-        $('#quickTaskTitle').value = '';
-        $('#quickTaskDueDate').value = dateKey();
-        $('#quickTaskPriority').value = '中';
-        $('#quickTaskForm').classList.add('collapsed');
-        $('#quickTaskForm').classList.remove('expanded');
-        setSelectedTaskId(task.id);
-        await loadState();
-        showToast('任务已添加');
-      } catch (error) { showToast(error.message); }
-    }
-
     function syncTaskPriorityPicker() {
       const value = $('#taskPriority')?.value || '中';
       document.querySelectorAll('[data-priority-option]').forEach((button) => {
@@ -1283,6 +1214,13 @@
       });
     }
 
+    function syncTaskFormValidity() {
+      const title = $('#taskTitle')?.value.trim();
+      const dueDate = $('#taskDueDate')?.value;
+      const submit = $('#taskSubmitButton');
+      if (submit) submit.disabled = !(title && dueDate);
+    }
+
     function openTask(task = null) {
       const editing = Boolean(task?.id);
       $('#taskModalTitle').textContent = editing ? '编辑待办' : '新建待办';
@@ -1290,7 +1228,7 @@
       $('#taskTitle').value = task?.title || '';
       $('#taskStatus').value = task?.status || '进行中';
       $('#taskPriority').value = task?.priority || '中';
-      $('#taskDueDate').value = task?.due_date || '';
+      $('#taskDueDate').value = task?.due_date || (editing ? '' : dateKey());
       $('#taskDueTime').value = task?.due_time || '';
       $('#taskDueTime').disabled = !$('#taskDueDate').value;
       $('#taskReminder').value = task?.reminder_time || '';
@@ -1298,6 +1236,7 @@
       $('#taskStatusField').classList.toggle('hidden-field', !editing);
       $('#taskSubmitButton').textContent = editing ? '保存修改' : '创建任务';
       syncTaskPriorityPicker();
+      syncTaskFormValidity();
       $('#taskModal').classList.add('show');
       setTimeout(() => $('#taskTitle').focus(), 0);
     }
@@ -1379,8 +1318,8 @@
     async function saveTask(event) {
       event.preventDefault();
       const payload = { title:$('#taskTitle').value.trim(), status:$('#taskStatus').value, priority:$('#taskPriority').value, due_date:$('#taskDueDate').value, due_time:$('#taskDueTime').value, reminder_time:$('#taskReminder').value, description:$('#taskDescription').value.trim() };
-      if (!payload.title) return;
-      if (!payload.due_date) payload.due_time = '';
+      if (!payload.title) { showToast('请输入任务名称'); $('#taskTitle').focus(); return; }
+      if (!payload.due_date) { showToast('请选择截止日期'); $('#taskDueDate').focus(); return; }
       if (!$('#taskId').value) payload.status = '进行中';
       if (payload.due_date && payload.due_date < dateKey() && !confirm('截止日期早于今天，创建后该任务会显示为已逾期。仍要继续创建吗？')) return;
       const submit = $('#taskSubmitButton');
@@ -1484,7 +1423,6 @@
       const preview = event.target.closest('[data-preview-image]'); if (preview) { openImagePreview(preview.dataset.previewImage, preview.dataset.previewName); return; }
       const nav = event.target.closest('[data-nav]'); if (nav) { navTo(nav.dataset.nav); return; }
       if (event.target.closest('[data-new-task]')) { openTask(); return; }
-      if (event.target.closest('#quickTaskMore')) { event.preventDefault(); openTask({ title:$('#quickTaskTitle').value.trim(), status:'进行中', priority:$('#quickTaskPriority').value, due_date:$('#quickTaskDueDate').value || dateKey(), due_time:'', reminder_time:'', description:'' }); return; }
       if (event.target.closest('[data-close-modal]')) { closeModals(); return; }
       if (event.target.closest('[data-back-library]')) { $('#tasksView').classList.remove('library-detail-open'); renderTasks(); renderLibraryDetail(); return; }
       if (event.target.closest('[data-clear-library]')) { libraryTaskId = ''; renderLibraryDetail(); return; }
@@ -1506,11 +1444,8 @@
       }
     });
     $('#taskForm').addEventListener('submit', saveTask);
-    $('#quickTaskForm').addEventListener('submit', saveQuickTask);
-    $('#quickTaskTitle').addEventListener('focus', () => { $('#quickTaskForm').classList.remove('collapsed'); $('#quickTaskForm').classList.add('expanded'); });
-    $('#quickTaskDueDate').value = dateKey();
-    $('#taskDueDate').addEventListener('change', () => { $('#taskDueTime').disabled = !$('#taskDueDate').value; if (!$('#taskDueDate').value) $('#taskDueTime').value = ''; });
-    $('#clearDueDate').addEventListener('click', () => { $('#taskDueDate').value = ''; $('#taskDueTime').value = ''; $('#taskDueTime').disabled = true; });
+    $('#taskTitle').addEventListener('input', syncTaskFormValidity);
+    $('#taskDueDate').addEventListener('change', () => { $('#taskDueTime').disabled = !$('#taskDueDate').value; if (!$('#taskDueDate').value) $('#taskDueTime').value = ''; syncTaskFormValidity(); });
     document.querySelectorAll('[data-priority-option]').forEach((button) => button.addEventListener('click', () => { $('#taskPriority').value = button.dataset.priorityOption; syncTaskPriorityPicker(); }));
     $('#taskSearch').addEventListener('input', renderTasks);
     document.querySelectorAll('[data-task-filter]').forEach((button) => button.addEventListener('click', () => { taskFilter = button.dataset.taskFilter; renderTasks(); }));
