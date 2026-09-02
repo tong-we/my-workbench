@@ -4,6 +4,7 @@ import json
 import mimetypes
 import os
 import socket
+import sys
 import threading
 import uuid
 import zipfile
@@ -14,11 +15,18 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 
-ROOT = Path(__file__).resolve().parent
+# 普通 Python 运行时，数据和网页都位于项目目录；打包成 exe 后，网页资源
+# 位于 PyInstaller 临时资源目录，而 data 必须固定保存在 exe 旁边，确保重启后不丢失。
+if getattr(sys, "frozen", False):
+    ROOT = Path(sys.executable).resolve().parent
+    RESOURCE_ROOT = Path(getattr(sys, "_MEIPASS", ROOT))
+else:
+    ROOT = Path(__file__).resolve().parent
+    RESOURCE_ROOT = ROOT
 DATA_DIR = ROOT / "data"
 ATTACHMENTS_DIR = DATA_DIR / "attachments"
 DB_FILE = DATA_DIR / "app.json"
-INDEX_FILE = ROOT / "index.html"
+INDEX_FILE = RESOURCE_ROOT / "index.html"
 PORT = 8765
 MAX_UPLOAD_BYTES = 50 * 1024 * 1024
 LOCK = threading.RLock()

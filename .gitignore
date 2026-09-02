@@ -7,6 +7,9 @@ UI_REVIEW/
 UI_REVIEW_FINAL/
 __pycache__/
 *.pyc
+build/
+dist/
+*.spec
 history-overflow-check.png
 
 # Windows / editor files
