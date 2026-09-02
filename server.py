@@ -7,6 +7,7 @@ import socket
 import sys
 import threading
 import uuid
+import webbrowser
 import zipfile
 from datetime import datetime
 from http import HTTPStatus
@@ -383,6 +384,8 @@ def main():
     print(f"电脑访问：http://127.0.0.1:{PORT}")
     print(f"手机访问：http://{lan_ip()}:{PORT}（需与电脑连接同一 Wi‑Fi）")
     print("按 Ctrl+C 停止")
+    if getattr(sys, "frozen", False):
+        threading.Timer(0.8, lambda: webbrowser.open(f"http://127.0.0.1:{PORT}")).start()
     try:
         server.serve_forever()
     except KeyboardInterrupt:
