@@ -821,6 +821,40 @@
       .detail-surface .panel-head { margin-bottom:9px; }
       .history-surface .history-list { max-height:300px; }
     }
+    /* Task editor refinement: one complete create/edit surface, without changing the page layout. */
+    .task-editor-backdrop { justify-content:flex-end; padding:0; background:rgba(20,31,47,.28); }
+    .task-editor-modal { width:min(480px,100%); height:100%; max-height:100%; overflow:auto; border-radius:18px 0 0 18px; padding:26px 24px; animation:task-editor-in 180ms ease-out; }
+    @keyframes task-editor-in { from { opacity:0; transform:translateX(18px); } to { opacity:1; transform:translateX(0); } }
+    .task-editor-modal .modal-head { margin-bottom:22px; }
+    .task-editor-modal .modal-head h2 { color:var(--text-heading); font-size:20px; font-weight:600; }
+    .task-editor-modal .field { gap:7px; margin-bottom:14px; }
+    .task-editor-modal .form-row { gap:12px; }
+    .task-editor-modal .field input,.task-editor-modal .field textarea,.task-editor-modal .field select { background:#fff; }
+    .task-editor-modal .field textarea { min-height:104px; }
+    .task-editor-modal .task-date-row { align-items:end; }
+    .task-editor-modal .date-field-wrap { position:relative; }
+    .task-editor-modal .field-clear { position:absolute; right:8px; bottom:7px; padding:3px 5px; border:0; color:var(--primary); background:transparent; font-size:11px; cursor:pointer; }
+    .task-editor-modal .field-clear:hover { color:var(--brand-ink); }
+    .priority-picker { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }
+    .priority-choice { min-height:39px; padding:7px 8px; border:1px solid var(--line); border-radius:9px; color:var(--text-secondary); background:#fff; font-size:13px; cursor:pointer; transition:background var(--transition),border-color var(--transition),color var(--transition); }
+    .priority-choice:hover { border-color:#c7d0dc; }
+    .priority-choice.active { color:var(--brand-ink); border-color:#b9c7ff; background:var(--brand-soft); box-shadow:0 0 0 2px rgba(79,110,247,.08); }
+    .priority-choice[data-priority="高"].active { color:#a13d35; border-color:#f0c2bc; background:#fff5f3; }
+    .priority-choice[data-priority="中"].active { color:#966017; border-color:#efd39a; background:#fff9ed; }
+    .priority-choice[data-priority="低"].active { color:#45627a; border-color:#c7d7e5; background:#f4f8fb; }
+    .task-editor-modal .hidden-field { display:none; }
+    .task-editor-modal .modal-foot { margin-top:22px; padding-top:16px; border-top:1px solid var(--line-soft); }
+    .task-editor-modal .modal-foot .button.primary { min-width:112px; }
+    .quick-more { display:none; white-space:nowrap; }
+    .quick-add.expanded .quick-more { display:inline-flex; }
+    @media (max-width:700px) {
+      .task-editor-backdrop { align-items:stretch; }
+      .task-editor-modal { width:100%; height:100%; border-radius:0; padding:22px 16px calc(22px + env(safe-area-inset-bottom)); }
+      .task-editor-modal .modal-foot { position:sticky; bottom:0; margin-left:-16px; margin-right:-16px; padding:14px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(255,255,255,.96); }
+      .quick-add.expanded { grid-template-columns:20px minmax(0,1fr) auto; }
+      .quick-add.expanded .quick-more { grid-column:2; justify-self:start; }
+      .quick-add.expanded .button[type="submit"] { grid-column:3; width:auto; }
+    }
   </style>
 </head>
 <body>
@@ -839,7 +873,7 @@
       <section class="view active" id="todayView">
         <div class="topbar"><div><div class="eyebrow" id="todayDate">9月1日 · 星期二</div><h1>今日待办</h1></div><div class="topbar-right"><div class="time-info"><strong id="liveClock">--:--</strong><span id="liveDate">9月1日 · 星期二</span><small id="holidayText">寻找下一个节日</small></div><button class="button primary" data-new-task>＋ 新建任务</button></div></div>
         <div class="today-stats" aria-label="今日概览"><div class="stat-item"><span class="stat-label">待完成</span><strong id="statTasks">0</strong></div><div class="stat-item"><span class="stat-label">今日</span><strong id="statDone">0</strong></div><div class="stat-item"><span class="stat-label">逾期</span><strong id="statDue">0</strong></div><div class="stat-item"><span class="stat-label">高优先</span><strong id="statHigh">0</strong></div></div>
-        <form class="quick-add collapsed" id="quickTaskForm"><span class="quick-add-mark">＋</span><input type="text" id="quickTaskTitle" required placeholder="添加今日任务…"><input type="date" id="quickTaskDueDate"><select id="quickTaskPriority" aria-label="优先级"><option>中</option><option>高</option><option>低</option></select><button class="button primary" type="submit">添加</button></form>
+        <form class="quick-add collapsed" id="quickTaskForm"><span class="quick-add-mark">＋</span><input type="text" id="quickTaskTitle" required placeholder="快速添加任务…"><input type="date" id="quickTaskDueDate" aria-label="快速添加截止日期"><select id="quickTaskPriority" aria-label="快速添加优先级"><option value="中">中优先级</option><option value="高">高优先级</option><option value="低">低优先级</option></select><button class="button ghost quick-more" id="quickTaskMore" type="button">更多设置</button><button class="button primary" type="submit">Enter 添加</button></form>
         <div class="today-layout"><section class="panel today-list-panel"><div class="panel-head"><div><h2>待办清单</h2><div class="progress-line compact"><span id="progressText">还没有任务</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span id="progressPercent">0%</span></div></div><span class="muted small" id="todayCount"></span></div><div class="task-list home-task-list" id="todayTasks"></div></section><section class="panel today-detail-panel" id="todayDetailPane"><div class="detail-placeholder"><span class="placeholder-mark">↗</span><strong>选择任务</strong><p>详情与工作记录会在这里查看。</p></div></section></div>
         <section class="panel upcoming-panel"><div class="panel-head"><h2>未来 5 天未完成任务</h2></div><div class="upcoming-list" id="upcomingList"></div></section>
       </section>
@@ -863,7 +897,7 @@
     </main>
   </div>
 
-  <div class="modal-backdrop" id="taskModal"><form class="modal" id="taskForm"><div class="modal-head"><h2 id="taskModalTitle">新建任务</h2><button class="close" type="button" data-close-modal>×</button></div><input type="hidden" id="taskId"><div class="field"><label for="taskTitle">任务名称</label><input id="taskTitle" required placeholder="例如：制作国庆活动宣传海报"></div><div class="form-row"><div class="field"><label for="taskStatus">状态</label><select id="taskStatus"><option>进行中</option><option>等待所需资源</option><option>已完成</option><option>已取消</option></select></div><div class="field"><label for="taskPriority">优先级</label><select id="taskPriority"><option>高</option><option selected>中</option><option>低</option></select></div></div><div class="form-row"><div class="field"><label for="taskDueDate">截止日期</label><input type="date" id="taskDueDate"></div><div class="field"><label for="taskDueTime">截止时间</label><input type="time" id="taskDueTime"></div></div><div class="field"><label for="taskReminder">任务提醒时间（可选）</label><input type="datetime-local" id="taskReminder"></div><div class="field"><label for="taskDescription">任务说明</label><textarea id="taskDescription" placeholder="写下背景、交付标准、需要注意的事情"></textarea></div><div class="modal-foot"><button type="button" class="button" data-close-modal>取消</button><button type="submit" class="button primary">保存任务</button></div></form></div>
+  <div class="modal-backdrop task-editor-backdrop" id="taskModal"><form class="modal task-editor-modal" id="taskForm"><div class="modal-head"><h2 id="taskModalTitle">新建待办</h2><button class="close" type="button" data-close-modal aria-label="关闭">×</button></div><input type="hidden" id="taskId"><div class="field"><label for="taskTitle">任务名称 *</label><input id="taskTitle" required placeholder="例如：完成季度汇报材料"></div><div class="field"><label for="taskDescription">任务说明</label><textarea id="taskDescription" placeholder="补充任务背景、要求或需要完成的内容……"></textarea></div><div class="form-row task-date-row"><div class="field date-field-wrap"><label for="taskDueDate">截止日期</label><input type="date" id="taskDueDate"><button type="button" class="field-clear" id="clearDueDate">无截止日期</button></div><div class="field"><label for="taskDueTime">截止时间</label><input type="time" id="taskDueTime" disabled></div></div><div class="field"><label>优先级</label><div class="priority-picker" id="taskPriorityPicker" role="radiogroup" aria-label="优先级"><button type="button" class="priority-choice" data-priority-option="低">低</button><button type="button" class="priority-choice active" data-priority-option="中">中</button><button type="button" class="priority-choice" data-priority-option="高">高</button></div><select id="taskPriority" class="hidden-field" aria-hidden="true" tabindex="-1"><option value="低">低</option><option value="中" selected>中</option><option value="高">高</option></select></div><div class="field hidden-field" id="taskStatusField"><label for="taskStatus">状态</label><select id="taskStatus"><option>进行中</option><option>等待所需资源</option><option>已完成</option><option>已取消</option></select></div><div class="field"><label for="taskReminder">任务提醒时间（可选）</label><input type="datetime-local" id="taskReminder"></div><div class="modal-foot"><button type="button" class="button" data-close-modal>取消</button><button type="submit" class="button primary" id="taskSubmitButton">创建任务</button></div></form></div>
   <div class="image-preview-backdrop" id="imagePreviewBackdrop">
     <section class="image-preview-panel" role="dialog" aria-modal="true" aria-label="截图预览">
       <div class="image-preview-head"><strong id="previewImageName">截图预览</strong><button class="close" type="button" data-close-image-preview>×</button></div>
@@ -1149,16 +1183,30 @@
       } catch (error) { showToast(error.message); }
     }
 
+    function syncTaskPriorityPicker() {
+      const value = $('#taskPriority')?.value || '中';
+      document.querySelectorAll('[data-priority-option]').forEach((button) => {
+        const active = button.dataset.priorityOption === value;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-checked', active ? 'true' : 'false');
+      });
+    }
+
     function openTask(task = null) {
-      $('#taskModalTitle').textContent = task ? '编辑任务' : '新建任务';
+      const editing = Boolean(task?.id);
+      $('#taskModalTitle').textContent = editing ? '编辑待办' : '新建待办';
       $('#taskId').value = task?.id || '';
       $('#taskTitle').value = task?.title || '';
       $('#taskStatus').value = task?.status || '进行中';
       $('#taskPriority').value = task?.priority || '中';
-      $('#taskDueDate').value = task?.due_date || dateKey();
+      $('#taskDueDate').value = task?.due_date || '';
       $('#taskDueTime').value = task?.due_time || '';
+      $('#taskDueTime').disabled = !$('#taskDueDate').value;
       $('#taskReminder').value = task?.reminder_time || '';
       $('#taskDescription').value = task?.description || '';
+      $('#taskStatusField').classList.toggle('hidden-field', !editing);
+      $('#taskSubmitButton').textContent = editing ? '保存修改' : '创建任务';
+      syncTaskPriorityPicker();
       $('#taskModal').classList.add('show');
       setTimeout(() => $('#taskTitle').focus(), 0);
     }
@@ -1241,11 +1289,16 @@
       event.preventDefault();
       const payload = { title:$('#taskTitle').value.trim(), status:$('#taskStatus').value, priority:$('#taskPriority').value, due_date:$('#taskDueDate').value, due_time:$('#taskDueTime').value, reminder_time:$('#taskReminder').value, description:$('#taskDescription').value.trim() };
       if (!payload.title) return;
+      if (!payload.due_date) payload.due_time = '';
+      if (!$('#taskId').value) payload.status = '进行中';
+      if (payload.due_date && payload.due_date < dateKey() && !confirm('截止日期早于今天，创建后该任务会显示为已逾期。仍要继续创建吗？')) return;
+      const submit = $('#taskSubmitButton');
+      submit.disabled = true;
       try {
         const id = $('#taskId').value;
         const task = await api(id ? `/api/tasks/${id}` : '/api/tasks', { method:id ? 'PATCH' : 'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
-        closeModals(); await loadState(); setSelectedTaskId(task.id); if (currentView === 'today') renderTodayDetail(); else if (currentView === 'tasks') renderLibraryDetail(); showToast(id ? '任务已更新' : '任务已创建');
-      } catch (error) { showToast(error.message); }
+        closeModals(); await loadState(); setSelectedTaskId(task.id); if (currentView === 'today') renderTodayDetail(); else if (currentView === 'tasks') renderLibraryDetail(); showToast(id ? '✓ 待办已更新' : '✓ 待办已创建');
+      } catch (error) { showToast(error.message); } finally { submit.disabled = false; }
     }
 
     function renderCurrentView() {
@@ -1305,7 +1358,8 @@
       if (event.target.id === 'imagePreviewBackdrop' || event.target.closest('[data-close-image-preview]')) { closeImagePreview(); return; }
       const preview = event.target.closest('[data-preview-image]'); if (preview) { openImagePreview(preview.dataset.previewImage, preview.dataset.previewName); return; }
       const nav = event.target.closest('[data-nav]'); if (nav) { navTo(nav.dataset.nav); return; }
-      if (event.target.closest('[data-new-task]')) { focusQuickAdd(); return; }
+      if (event.target.closest('[data-new-task]')) { openTask(); return; }
+      if (event.target.closest('#quickTaskMore')) { event.preventDefault(); openTask({ title:$('#quickTaskTitle').value.trim(), status:'进行中', priority:$('#quickTaskPriority').value, due_date:$('#quickTaskDueDate').value || dateKey(), due_time:'', reminder_time:'', description:'' }); return; }
       if (event.target.closest('[data-close-modal]')) { closeModals(); return; }
       if (event.target.closest('[data-back-library]')) { $('#tasksView').classList.remove('library-detail-open'); renderTasks(); renderLibraryDetail(); return; }
       if (event.target.closest('[data-clear-library]')) { libraryTaskId = ''; renderLibraryDetail(); return; }
@@ -1330,6 +1384,9 @@
     $('#quickTaskForm').addEventListener('submit', saveQuickTask);
     $('#quickTaskTitle').addEventListener('focus', () => { $('#quickTaskForm').classList.remove('collapsed'); $('#quickTaskForm').classList.add('expanded'); });
     $('#quickTaskDueDate').value = dateKey();
+    $('#taskDueDate').addEventListener('change', () => { $('#taskDueTime').disabled = !$('#taskDueDate').value; if (!$('#taskDueDate').value) $('#taskDueTime').value = ''; });
+    $('#clearDueDate').addEventListener('click', () => { $('#taskDueDate').value = ''; $('#taskDueTime').value = ''; $('#taskDueTime').disabled = true; });
+    document.querySelectorAll('[data-priority-option]').forEach((button) => button.addEventListener('click', () => { $('#taskPriority').value = button.dataset.priorityOption; syncTaskPriorityPicker(); }));
     $('#taskSearch').addEventListener('input', renderTasks);
     document.querySelectorAll('[data-task-filter]').forEach((button) => button.addEventListener('click', () => { taskFilter = button.dataset.taskFilter; renderTasks(); }));
     $('#reminderTime').addEventListener('change', saveSettings);
