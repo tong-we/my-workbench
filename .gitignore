@@ -1,0 +1,15 @@
+# 每台电脑独立保存的本地数据，禁止上传到 GitHub
+data/
+
+# 本地备份、截图审查和运行缓存
+BACKUP_*/
+UI_REVIEW/
+UI_REVIEW_FINAL/
+__pycache__/
+*.pyc
+history-overflow-check.png
+
+# Windows / editor files
+.DS_Store
+Thumbs.db
+.vscode/
